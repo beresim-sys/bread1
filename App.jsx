@@ -717,7 +717,7 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200/40 text-stone-700 text-sm space-y-2">
                       <p className="font-bold text-amber-900">מתכון להכנת המחמצת:</p>
-                      <p>קח <strong className="text-amber-800">{requiredStarterPrep} גרם</strong> מהמחמצת הפעילה שלך, והוסף לה:</p>
+                      <p>קח <strong className="text-amber-800">{requiredStarterPrep} גרם</strong> מהגור שלך, והוסף לו:</p>
                       <ul className="list-disc list-inside mr-2 space-y-1 font-semibold text-stone-800">
                         <li>קמח: {flourToFeedPrep} גרם (יחס פי 2)</li>
                         <li>מים: {waterToFeedPrep} גרם (יחס פי 2)</li>
