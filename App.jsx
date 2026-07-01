@@ -217,6 +217,40 @@ export default function App() {
       localStorage.removeItem('sourdough_bakeTimerEndTime');
     }
   }, [bakeStep, bakeStep1Checked, bakeTimerActive, bakeTimerPaused, bakeTimerRemaining, bakeTimerEndTime, bakeTimerIsFinished]);
+  const playAlarmSound = () => {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      const audioCtx = new AudioContext();
+      
+      const playBeep = (startTime, duration, frequency) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(frequency, startTime);
+        
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.3, startTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+        
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      };
+
+      const now = audioCtx.currentTime;
+      // Play a sequence of 4 beeps (A5 A5 A5 C#6)
+      playBeep(now, 0.25, 880);
+      playBeep(now + 0.3, 0.25, 880);
+      playBeep(now + 0.6, 0.25, 880);
+      playBeep(now + 0.9, 0.5, 1109.73);
+    } catch (e) {
+      console.warn("Failed to play Web Audio alarm:", e);
+    }
+  };
 
   // Timers countdown Interval Effect
   useEffect(() => {
@@ -230,6 +264,7 @@ export default function App() {
         if (remaining === 0) {
           setPrepTimerActive(false);
           setPrepTimerEndTime(null);
+          playAlarmSound();
           // Play a gentle beep or vibration if API allows
           if ('vibrate' in navigator) navigator.vibrate([200, 100, 200]);
         }
@@ -243,6 +278,7 @@ export default function App() {
           setBakeTimerActive(false);
           setBakeTimerEndTime(null);
           setBakeTimerIsFinished(true);
+          playAlarmSound();
           if ('vibrate' in navigator) navigator.vibrate([300, 100, 300, 100, 300]);
         }
       }
