@@ -228,7 +228,6 @@ export default function App() {
         const remaining = Math.max(0, prepTimerEndTime - now);
         setPrepTimerRemaining(remaining);
         if (remaining === 0) {
-          setPrepTimerActive(false);
           setPrepTimerEndTime(null);
           // Play a gentle beep or vibration if API allows
           if ('vibrate' in navigator) navigator.vibrate([200, 100, 200]);
@@ -369,9 +368,14 @@ export default function App() {
   };
 
   const handleSkipPrepTimer = () => {
-    setPrepTimerActive(false);
     setPrepTimerEndTime(null);
     setPrepTimerRemaining(0);
+  };
+
+  const handleFinishPrep = () => {
+    setPrepTimerActive(false);
+    setPrepTimerEndTime(null);
+    setPrepTimerRemaining(7 * 60 * 60 * 1000);
     setPrepFlourChecked(false);
     setPrepWaterChecked(false);
     setActiveTab('bake');
@@ -853,7 +857,7 @@ export default function App() {
                           🎉 הזמן עבר! הסטרטר שלך מוכן, תוסס ומוכן לאפייה!
                         </div>
                         <button 
-                          onClick={handleSkipPrepTimer}
+                          onClick={handleFinishPrep}
                           className="w-full py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold rounded-xl transition-all shadow-md"
                         >
                           עבור לאפיית הלחם
