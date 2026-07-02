@@ -374,6 +374,7 @@ export default function App() {
     setPrepTimerRemaining(0);
     setPrepFlourChecked(false);
     setPrepWaterChecked(false);
+    setActiveTab('bake');
   };
 
   const triggerCancelPrepTimerModal = () => {
