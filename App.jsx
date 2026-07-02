@@ -385,6 +385,15 @@ export default function App() {
     setLoaves(1);
     setPrepFlourChecked(false);
     setPrepWaterChecked(false);
+    
+    // Reset Tab 3 baking process
+    setBakeStep(0);
+    setBakeStep1Checked(false);
+    setBakeTimerActive(false);
+    setBakeTimerPaused(false);
+    setBakeTimerEndTime(null);
+    setBakeTimerRemaining(0);
+    setBakeTimerIsFinished(false);
   };
 
   const triggerCancelPrepTimerModal = () => {
