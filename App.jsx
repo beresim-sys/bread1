@@ -381,6 +381,12 @@ export default function App() {
     setActiveTab('bake');
   };
 
+  const handleResetPrep = () => {
+    setLoaves(1);
+    setPrepFlourChecked(false);
+    setPrepWaterChecked(false);
+  };
+
   const triggerCancelPrepTimerModal = () => {
     setModalConfig({
       isOpen: true,
@@ -531,6 +537,17 @@ export default function App() {
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>איפוס אפייה</span>
+            </button>
+          )}
+
+          {/* Header Action Link (Prep reset) */}
+          {activeTab === 'prep' && !prepTimerActive && (
+            <button 
+              onClick={handleResetPrep}
+              className="flex items-center gap-1 text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-50 hover:bg-amber-100 py-1.5 px-3 rounded-full transition-all border border-amber-200/50"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>איפוס הגדרות</span>
             </button>
           )}
         </header>
