@@ -420,10 +420,12 @@ export default function App() {
   };
 
   const handleSkipBakeTimer = () => {
+    setBakeTimerIsFinished(false);
     setBakeTimerActive(false);
     setBakeTimerEndTime(null);
     setBakeTimerRemaining(0);
-    setBakeTimerIsFinished(true);
+    setBakeStep1Checked(false);
+    setBakeStep(prev => Math.min(STEPS.length - 1, prev + 1));
   };
 
   const triggerCancelBakeTimerModal = () => {
